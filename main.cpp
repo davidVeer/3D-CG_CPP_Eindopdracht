@@ -68,6 +68,7 @@ void update()
 void draw()
 {
     glm::mat4 projectionMatrix, modelMatrix, viewMatrix;
+    GLuint textureId;
 
     glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -81,19 +82,39 @@ void draw()
     tigl::shader->setProjectionMatrix(projectionMatrix);
     tigl::shader->setViewMatrix(cameraControl->getMatrix());
     tigl::shader->enableColor(true);
+    tigl::shader->enableTexture(true);
+
+    glGenTextures(1, &textureId);
+    glBindTexture(GL_TEXTURE_2D, textureId);
+    unsigned char data[32 * 32 * 4];
+    for (int i = 0; i < 32 * 32 * 4; i++)
+        data[i] = rand() % 256;
+    glTexImage2D(GL_TEXTURE_2D,
+        0, //level
+        GL_RGBA, //internal format
+        32, //width
+        32, //height
+        0, //border
+        GL_RGBA, //data format
+        GL_UNSIGNED_BYTE, //data type
+        data); //data
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     tigl::begin(GL_TRIANGLES);
-    tigl::addVertex(Vertex::PC(glm::vec3(-2, -1, -4), glm::vec4(1, 0, 0, 1))); // Bottom left
-    tigl::addVertex(Vertex::PC(glm::vec3(2, -1, -4), glm::vec4(1, 0, 0, 1))); // Bottom Right
-    tigl::addVertex(Vertex::PC(glm::vec3(-2, 1, -4), glm::vec4(1, 0, 0, 1))); // Top left
+    tigl::addVertex(Vertex::PTC(glm::vec3(-2, -1, -4), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom left
+    tigl::addVertex(Vertex::PTC(glm::vec3(2, -1, -4), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Bottom Right
+    tigl::addVertex(Vertex::PTC(glm::vec3(-2, 1, -4), glm::vec2(0.0f,0.0f), glm::vec4(1, 1, 1, 1))); // Top left
+    tigl::end();
 
-    tigl::addVertex(Vertex::PC(glm::vec3(-10, -1, -10), glm::vec4(1, 0, 0, 1))); //left front
-    tigl::addVertex(Vertex::PC(glm::vec3(-10, -1, 10), glm::vec4(0, 1, 0, 1))); //left behind
-    tigl::addVertex(Vertex::PC(glm::vec3(10, -1, 10), glm::vec4(0, 0, 1, 1))); //right behind
+    tigl::shader->enableTexture(false);
+    tigl::begin(GL_TRIANGLES);
+    tigl::addVertex(Vertex::PTC(glm::vec3(-10, -1, -10), glm::vec2(0.0f, 0.0f), glm::vec4(1, 0, 0, 1))); //left front
+    tigl::addVertex(Vertex::PTC(glm::vec3(-10, -1, 10), glm::vec2(0.0f, 0.0f), glm::vec4(0, 1, 0, 1))); //left behind
+    tigl::addVertex(Vertex::PTC(glm::vec3(10, -1, 10), glm::vec2(0.0f, 0.0f), glm::vec4(0, 0, 1, 1))); //right behind
 
-    tigl::addVertex(Vertex::PC(glm::vec3(-10, -1, -10), glm::vec4(1, 0, 0, 1))); //left front
-    tigl::addVertex(Vertex::PC(glm::vec3(10, -1, -10), glm::vec4(1, 0, 1, 1))); //right front
-    tigl::addVertex(Vertex::PC(glm::vec3(10, -1, 10), glm::vec4(0, 0, 1, 1))); //right behind
-
+    tigl::addVertex(Vertex::PTC(glm::vec3(-10, -1, -10), glm::vec2(0.0f, 0.0f), glm::vec4(1, 0, 0, 1))); //left front
+    tigl::addVertex(Vertex::PTC(glm::vec3(10, -1, -10), glm::vec2(0.0f, 0.0f), glm::vec4(1, 0, 1, 1))); //right front
+    tigl::addVertex(Vertex::PTC(glm::vec3(10, -1, 10), glm::vec2(0.0f, 0.0f), glm::vec4(0, 0, 1, 1))); //right behind
     tigl::end();
 }
