@@ -37,6 +37,9 @@ void KeyboardAndMouseCamera::update(GLFWwindow* window)
 	rotation.x -= (float)(lastY - y) / 100.0f;
 	rotation.y -= (float)(lastX - x) / 100.0f;
 
+	if			(rotation.x > glm::radians(90.0f))	{ rotation.x = glm::radians(90.0f);}
+	else if		(rotation.x < glm::radians(-90.0f))	{ rotation.x = glm::radians(-90.0f);}
+
 	lastX = x;
 	lastY = y;
 
