@@ -4,6 +4,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "CameraHandling/Headers/CameraStrategy.h"
 #include "CameraHandling/Headers/KeyboardAndMouse_Camera.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "lib/stb/stb_image.h"
 
 using tigl::Vertex;
 
@@ -81,33 +83,35 @@ void draw()
 
     tigl::shader->setProjectionMatrix(projectionMatrix);
     tigl::shader->setViewMatrix(cameraControl->getMatrix());
-    tigl::shader->enableColor(true);
-    tigl::shader->enableTexture(true);
 
-    glGenTextures(1, &textureId);
-    glBindTexture(GL_TEXTURE_2D, textureId);
-    unsigned char data[32 * 32 * 4];
-    for (int i = 0; i < 32 * 32 * 4; i++)
-        data[i] = rand() % 256;
+    int width, height, bpp;
+    unsigned char* imgData = stbi_load("Recources/Bob.png", &width, &height, &bpp, 4);
+    
     glTexImage2D(GL_TEXTURE_2D,
         0, //level
         GL_RGBA, //internal format
-        32, //width
-        32, //height
+        507, //width
+        537, //height
         0, //border
         GL_RGBA, //data format
         GL_UNSIGNED_BYTE, //data type
-        data); //data
+        imgData); //data
+    stbi_image_free(imgData);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+
+    tigl::shader->enableTexture(true);
+    tigl::shader->enableColor(false);
     tigl::begin(GL_TRIANGLES);
     tigl::addVertex(Vertex::PTC(glm::vec3(-2, -1, -4), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom left
     tigl::addVertex(Vertex::PTC(glm::vec3(2, -1, -4), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Bottom Right
     tigl::addVertex(Vertex::PTC(glm::vec3(-2, 1, -4), glm::vec2(0.0f,0.0f), glm::vec4(1, 1, 1, 1))); // Top left
     tigl::end();
 
+    tigl::shader->enableColor(true);
     tigl::shader->enableTexture(false);
+
     tigl::begin(GL_TRIANGLES);
     tigl::addVertex(Vertex::PTC(glm::vec3(-10, -1, -10), glm::vec2(0.0f, 0.0f), glm::vec4(1, 0, 0, 1))); //left front
     tigl::addVertex(Vertex::PTC(glm::vec3(-10, -1, 10), glm::vec2(0.0f, 0.0f), glm::vec4(0, 1, 0, 1))); //left behind

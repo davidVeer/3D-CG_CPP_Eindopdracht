@@ -163,10 +163,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraHandling\Headers\KeyboardAndMouse_Camera.h" />
+    <ClInclude Include="lib\stb\stb_image.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Recources\Bob.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
