@@ -25,9 +25,18 @@ void KeyboardAndMouseCamera::move(float angle, float fac)
 	position.z += (float)sin(rotation.y + glm::radians(angle)) * fac;
 }
 
+void KeyboardAndMouseCamera::processKeyboardInputs(GLFWwindow* window) {
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		move(0, 0.005f);
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		move(180, 0.005f);
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		move(90, 0.005f);
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		move(-90, 0.005f);
+}
 
-void KeyboardAndMouseCamera::update(GLFWwindow* window)
-{
+void KeyboardAndMouseCamera::processMouseInputs(GLFWwindow* window) {
 	double x, y;
 	glfwGetCursorPos(window, &x, &y);
 
@@ -37,16 +46,15 @@ void KeyboardAndMouseCamera::update(GLFWwindow* window)
 	rotation.x -= (float)(lastY - y) / 100.0f;
 	rotation.y -= (float)(lastX - x) / 100.0f;
 
+	if (rotation.x > glm::radians(90.0f)) { rotation.x = glm::radians(90.0f); }
+	else if (rotation.x < glm::radians(-90.0f)) { rotation.x = glm::radians(-90.0f); }
+
 	lastX = x;
 	lastY = y;
+}
 
-
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		move(0, 0.005f);
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		move(180, 0.005f);
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		move(90, 0.005f);
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		move(-90, 0.005f);
+void KeyboardAndMouseCamera::update(GLFWwindow* window)
+{
+	processMouseInputs(window);
+	processKeyboardInputs(window);
 }
