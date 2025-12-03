@@ -27,13 +27,13 @@ void KeyboardAndMouseCamera::move(float angle, float fac)
 
 void KeyboardAndMouseCamera::processKeyboardInputs(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		move(0, 0.005f);
+		move(0, 0.05f);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		move(180, 0.005f);
+		move(180, 0.05f);
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		move(90, 0.005f);
+		move(90, 0.05f);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		move(-90, 0.005f);
+		move(-90, 0.05f);
 }
 
 void KeyboardAndMouseCamera::processMouseInputs(GLFWwindow* window) {

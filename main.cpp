@@ -6,6 +6,7 @@
 #include "CameraHandling/Headers/KeyboardAndMouse_Camera.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "lib/stb/stb_image.h"
+#include "Objects/Headers/BasicObject.h"
 
 using tigl::Vertex;
 
@@ -131,43 +132,29 @@ void draw()
 
     tigl::shader->enableTexture(true);
     tigl::shader->enableColor(false);
-    tigl::begin(GL_TRIANGLES);
+    glm::vec3 verteces[8] = {
+        glm::vec3( 2, 1, -2),
+        glm::vec3( 2,-1, -2),
+        glm::vec3(-2, 1, -2),
+        glm::vec3(-2,-1, -2),
+        glm::vec3( 2, 1,  2),
+        glm::vec3( 2,-1,  2),
+        glm::vec3(-2, 1,  2),
+        glm::vec3(-2,-1,  2)
+    };
 
-    //sq z1
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, -1, -2), glm::vec2(0.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom left
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, -1, -2), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom Right
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, 1, -2), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top left
+    glm::vec4 colors[6] = {
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1)
+    };
 
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, 1, -2), glm::vec2(1.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top right
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, -1, -2), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom Right
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, 1, -2), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top left
+    BasicObject cube;
+    cube.setShape_Hexahedron(verteces, colors);
+    cube.draw();
 
-    //sq z2
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, -1, 2), glm::vec2(0.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom left
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, -1, 2), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom Right
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, 1, 2), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top left
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, 1, 2), glm::vec2(1.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top right
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, -1, 2), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom Right
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, 1, 2), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top left
-
-    //sq x1
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, 1, 2), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top left
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, -1, 2), glm::vec2(0.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom left
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, -1, -2), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom Righ
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, 1, -2), glm::vec2(1.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top right
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, -1, -2), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom Right
-    tigl::addVertex(Vertex::PTC(glm::vec3(2, 1, 2), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top left
-
-    //sq x2
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, 1, -2), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top left
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, -1, -2), glm::vec2(0.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom left
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, -1, 2), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom Righ
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, 1, 2), glm::vec2(1.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top right
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, -1, 2), glm::vec2(1.0f, 0.0f), glm::vec4(1, 1, 1, 1))); // Bottom Right
-    tigl::addVertex(Vertex::PTC(glm::vec3(-2, 1, -2), glm::vec2(0.0f, 1.0f), glm::vec4(1, 1, 1, 1))); // Top left
-
-    tigl::end();
+   
 }
