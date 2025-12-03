@@ -17,7 +17,7 @@ std::vector<tigl::Vertex> BasicObject::generateSquareFace(glm::vec3 topLeft, glm
     return faceVerteces;
 }
 
-void BasicObject::setShape_Hexahedron(glm::vec3 vertices[8],const glm::vec4 colors[6], const char* textureFilePath)
+void BasicObject::GenerateHexahedron(glm::vec3 vertices[8],const glm::vec4 colors[6], const char* textureFilePath)
 {
     std::vector<tigl::Vertex> frontFace = generateSquareFace(vertices[0], vertices[2], vertices[1], vertices[3], colors[0]);
     std::vector<tigl::Vertex> backFace = generateSquareFace(vertices[5], vertices[7], vertices[4], vertices[6], colors[0]);

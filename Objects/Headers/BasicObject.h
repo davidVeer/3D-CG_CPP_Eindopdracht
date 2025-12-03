@@ -18,7 +18,7 @@ public:
 	BasicObject();
 	~BasicObject() = default;
 	
-	void setShape_Hexahedron(
+	void GenerateHexahedron(
 		glm::vec3 vertices[8],
 		const glm::vec4 colors[6] = nullptr,
 		const char* textureFilePath = ""

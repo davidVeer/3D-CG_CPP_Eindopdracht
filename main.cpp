@@ -133,14 +133,14 @@ void draw()
     tigl::shader->enableTexture(true);
     tigl::shader->enableColor(false);
     glm::vec3 verteces[8] = {
-        glm::vec3( 2, 1, -2),
-        glm::vec3( 2,-1, -2),
-        glm::vec3(-2, 1, -2),
-        glm::vec3(-2,-1, -2),
-        glm::vec3( 2, 1,  2),
-        glm::vec3( 2,-1,  2),
-        glm::vec3(-2, 1,  2),
-        glm::vec3(-2,-1,  2)
+        glm::vec3( 2, 1,-2),
+        glm::vec3(-2, 1,-2),
+        glm::vec3( 2,-1,-2),
+        glm::vec3(-2,-1,-2),
+        glm::vec3( 2, 1, 2),
+        glm::vec3(-2, 1, 2),
+        glm::vec3( 2,-1, 2),
+        glm::vec3(-2,-1, 2),
     };
 
     glm::vec4 colors[6] = {
@@ -153,7 +153,7 @@ void draw()
     };
 
     BasicObject cube;
-    cube.setShape_Hexahedron(verteces, colors);
+    cube.GenerateHexahedron(verteces, colors);
     cube.draw();
 
    
