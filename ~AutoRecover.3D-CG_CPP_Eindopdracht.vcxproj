@@ -159,14 +159,25 @@
     <ClCompile Include="CameraHandling\Headers\CameraStrategy.h" />
     <ClCompile Include="CameraHandling\KeyboardAndMouse_Camera.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Objects\BasicObject.cpp" />
+    <ClCompile Include="Services\TextureLoader.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraHandling\Headers\KeyboardAndMouse_Camera.h" />
+    <ClInclude Include="lib\stb\stb_image.h" />
+    <ClInclude Include="Objects\Headers\BasicObject.h" />
+    <ClInclude Include="Objects\Headers\IDrawable.h" />
+    <ClInclude Include="Services\Headers\I2dFaceGenerator.h" />
+    <ClInclude Include="Services\Headers\I3dModelGenerator.h" />
+    <ClInclude Include="Services\Headers\TextureLoader.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Recources\Bob.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
