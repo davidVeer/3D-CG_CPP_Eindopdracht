@@ -15,6 +15,7 @@ using tigl::Vertex;
 
 GLFWwindow* window;
 std::shared_ptr<ICameraStrategy> cameraControl;
+std::shared_ptr<BasicObject> cube;
 float rotationY;
 
 void init();
@@ -61,6 +62,28 @@ void init()
         });
     cameraControl = std::make_shared<KeyboardAndMouseCamera>(KeyboardAndMouseCamera(window));
     rotationY = 0.0f;
+    glm::vec3 verteces[8] = {
+    glm::vec3(2, 1,-2),
+    glm::vec3(-2, 1,-2),
+    glm::vec3(2,-1,-2),
+    glm::vec3(-2,-1,-2),
+    glm::vec3(2, 1, 2),
+    glm::vec3(-2, 1, 2),
+    glm::vec3(2,-1, 2),
+    glm::vec3(-2,-1, 2),
+    };
+
+    glm::vec4 colors[6] = {
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1),
+        glm::vec4(1, 1, 1, 1)
+    };
+
+    cube = std::make_shared<BasicObject>();
+    cube->GenerateHexahedron(verteces, colors);
 }
 
 
@@ -111,29 +134,8 @@ void draw()
 
     
     tigl::shader->enableColor(false);
-    glm::vec3 verteces[8] = {
-        glm::vec3( 2, 1,-2),
-        glm::vec3(-2, 1,-2),
-        glm::vec3( 2,-1,-2),
-        glm::vec3(-2,-1,-2),
-        glm::vec3( 2, 1, 2),
-        glm::vec3(-2, 1, 2),
-        glm::vec3( 2,-1, 2),
-        glm::vec3(-2,-1, 2),
-    };
 
-    glm::vec4 colors[6] = {
-        glm::vec4(1, 1, 1, 1),
-        glm::vec4(1, 1, 1, 1),
-        glm::vec4(1, 1, 1, 1),
-        glm::vec4(1, 1, 1, 1),
-        glm::vec4(1, 1, 1, 1),
-        glm::vec4(1, 1, 1, 1)
-    };
-
-    BasicObject cube;
-    cube.GenerateHexahedron(verteces, colors);
-    cube.draw();
+    cube->draw();
 
    
 }
