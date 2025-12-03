@@ -1,4 +1,5 @@
 #include "Headers/BasicObject.h"
+#include "../Services/Headers/Textureloader.h"
 
 
 BasicObject::BasicObject() {
@@ -34,6 +35,8 @@ void BasicObject::GenerateHexahedron(glm::vec3 vertices[8],const glm::vec4 color
 }
 
 void BasicObject::draw() {
+    loadImage("Recources/Bob.png");
+    tigl::shader->enableTexture(true);
     tigl::begin(GL_TRIANGLES);
     for (const tigl::Vertex& v : shape.vertices) {
         tigl::addVertex(v);

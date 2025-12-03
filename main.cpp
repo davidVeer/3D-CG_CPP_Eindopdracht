@@ -4,8 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "CameraHandling/Headers/CameraStrategy.h"
 #include "CameraHandling/Headers/KeyboardAndMouse_Camera.h"
-#define STB_IMAGE_IMPLEMENTATION
-#include "lib/stb/stb_image.h"
+
 #include "Objects/Headers/BasicObject.h"
 
 using tigl::Vertex;
@@ -71,24 +70,7 @@ void update()
     rotationY += 0.005f;
 }
 
-void loadImage() {
-    int width, height, bpp;
-    unsigned char* imgData = stbi_load("Recources/Bob.png", &width, &height, &bpp, 4);
 
-    glTexImage2D(GL_TEXTURE_2D,
-        0, //level
-        GL_RGBA, //internal format
-        507, //width
-        537, //height
-        0, //border
-        GL_RGBA, //data format
-        GL_UNSIGNED_BYTE, //data type
-        imgData); //data
-    stbi_image_free(imgData);
-    stbi_set_flip_vertically_on_load(true);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-}
 
 void draw()
 {
@@ -123,14 +105,11 @@ void draw()
     tigl::end();
 
 
-    loadImage();
-
-
-    glm::mat4 model2 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 5.0f));
+    glm::mat4 model2 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -5.0f));
     model2 = glm::rotate(model2, rotationY, glm::vec3(0, 1, 0));
     tigl::shader->setModelMatrix(model2);
 
-    tigl::shader->enableTexture(true);
+    
     tigl::shader->enableColor(false);
     glm::vec3 verteces[8] = {
         glm::vec3( 2, 1,-2),
