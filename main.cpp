@@ -83,7 +83,7 @@ void init()
     };
 
     cube = std::make_shared<BasicObject>();
-    cube->GenerateHexahedron(verteces, colors);
+    cube->GenerateHexahedron(verteces, colors, "Recources/Bob.png");
 }
 
 

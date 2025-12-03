@@ -20,6 +20,8 @@ std::vector<tigl::Vertex> BasicObject::generateSquareFace(glm::vec3 topLeft, glm
 
 void BasicObject::GenerateHexahedron(glm::vec3 vertices[8],const glm::vec4 colors[6], const char* textureFilePath)
 {
+    shape.textureFilePath = textureFilePath;
+
     std::vector<tigl::Vertex> frontFace = generateSquareFace(vertices[0], vertices[2], vertices[1], vertices[3], colors[0]);
     std::vector<tigl::Vertex> backFace = generateSquareFace(vertices[5], vertices[7], vertices[4], vertices[6], colors[0]);
     std::vector<tigl::Vertex> leftFace = generateSquareFace(vertices[1], vertices[3], vertices[5], vertices[7], colors[0]);
@@ -35,7 +37,7 @@ void BasicObject::GenerateHexahedron(glm::vec3 vertices[8],const glm::vec4 color
 }
 
 void BasicObject::draw() {
-    loadImage("Recources/Bob.png");
+    loadImage(shape.textureFilePath);
     tigl::shader->enableTexture(true);
     tigl::begin(GL_TRIANGLES);
     for (const tigl::Vertex& v : shape.vertices) {
