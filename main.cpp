@@ -128,7 +128,7 @@ void draw()
     tigl::end();
 
 
-    glm::mat4 model2 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -5.0f));
+    glm::mat4 model2 = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, -5.0f));
     model2 = glm::rotate(model2, rotationY, glm::vec3(0, 1, 0));
     tigl::shader->setModelMatrix(model2);
 

@@ -1,5 +1,5 @@
 #include "Headers/BasicObject.h"
-#include "../Services/Headers/Textureloader.h"
+#include "../Services/Headers/Texture.h"
 
 
 BasicObject::BasicObject() {
@@ -37,7 +37,8 @@ void BasicObject::GenerateHexahedron(glm::vec3 vertices[8],const glm::vec4 color
 }
 
 void BasicObject::draw() {
-    loadImage(shape.textureFilePath);
+   
+    Texture loader = Texture(shape.textureFilePath);
     tigl::shader->enableTexture(true);
     tigl::begin(GL_TRIANGLES);
     for (const tigl::Vertex& v : shape.vertices) {

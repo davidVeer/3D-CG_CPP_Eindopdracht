@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -160,7 +160,8 @@
     <ClCompile Include="CameraHandling\KeyboardAndMouse_Camera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Objects\BasicObject.cpp" />
-    <ClCompile Include="Services\TextureLoader.cpp" />
+    <ClCompile Include="Services\ObjModel.cpp" />
+    <ClCompile Include="Services\Texture.cpp" />
     <ClCompile Include="tigl.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +170,8 @@
     <ClInclude Include="Objects\Headers\BasicObject.h" />
     <ClInclude Include="Objects\Headers\IDrawable.h" />
     <ClInclude Include="Objects\Interfaces\IDrawable.h" />
-    <ClInclude Include="Services\Headers\TextureLoader.h" />
+    <ClInclude Include="Services\Headers\ObjModel.h" />
+    <ClInclude Include="Services\Headers\Texture.h" />
     <ClInclude Include="tigl.h" />
   </ItemGroup>
   <ItemGroup>
